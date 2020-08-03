@@ -1,0 +1,26 @@
+# используем язык Java.
+language: java
+
+jdk:
+  - openjdk8
+
+# используем режим обычного пользователя для сборки проекта.
+sudo: false
+
+# после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
+# Здесь используется сторонни сервис https://codecov.io/
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+env:
+global:
+  - CODECOV_TOKEN="ce9f02dd-bddd-44cc-8876-993e6d21b6a0"
+
+
+# Отправлять уведомление на почту teenager_08@inbox.ru если сборка упала
+notifications:
+  email:
+    recipients:
+      - teenager_08@inbox.ru
+    on_success: never # default: change
+    on_failure: never # default: always
