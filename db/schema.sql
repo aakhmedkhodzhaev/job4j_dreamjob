@@ -4,5 +4,14 @@ CREATE TABLE post (
 );
 CREATE TABLE candidate (
    id SERIAL PRIMARY KEY,
-   name TEXT
+   name TEXT,
+   photo_id INTEGER,
+   FOREIGN KEY (photo_id)
+      REFERENCES photo (photo_id)
+);
+
+CREATE TABLE photo (
+   photo_id SERIAL PRIMARY KEY,
+   name TEXT,
+   photo bytea
 );
