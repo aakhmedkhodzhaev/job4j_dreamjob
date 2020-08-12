@@ -44,10 +44,14 @@ public class UploadServlet extends HttpServlet {
             for (FileItem item : items) {
                 if (!item.isFormField()) {
                     File file = new File(folder + File.separator + item.getName());
-                    try (FileOutputStream out = new FileOutputStream(file)) {
-                        InputStream is = new ByteArrayInputStream(new byte[] {});
-                        byte[] bytes = IOUtils.toByteArray(is);
-                        out.write(item.getInputStream().read(bytes));
+                    try (BufferedInputStream in = new BufferedInputStream(item.getInputStream());
+                            FileOutputStream out = new FileOutputStream(file))
+                    {
+                        byte dataBuffer[] = new byte[1024];
+                        int bytesRead;
+                        while ((bytesRead = in.read(dataBuffer, 0, dataBuffer.length)) != -1) {
+                            out.write(dataBuffer, 0, bytesRead);
+                        }
                     }
                 }
             }
