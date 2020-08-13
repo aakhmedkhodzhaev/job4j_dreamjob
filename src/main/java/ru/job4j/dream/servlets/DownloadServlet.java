@@ -18,7 +18,7 @@ public class DownloadServlet extends HttpServlet {
         File file = new File("images" + File.separator + name);
         try (FileInputStream in = new FileInputStream(file)) {
             int bytesRead;
-            while((bytesRead=in.read())!=-1){
+            while ((bytesRead = in.read()) != -1) {
                 resp.getOutputStream().write(bytesRead);
             }
         }
