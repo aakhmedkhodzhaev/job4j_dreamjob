@@ -3,6 +3,7 @@ package ru.job4j.dream.store;
 import org.apache.commons.dbcp2.BasicDataSource;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class PsqlStore implements Store {
 
@@ -44,6 +46,8 @@ public class PsqlStore implements Store {
     private static final class Lazy {
         private static final Store INST = new PsqlStore();
     }
+
+    private static final Logger log = Logger.getLogger(User.class.toString());
 
     public static Store instOf() {
         return Lazy.INST;
@@ -81,6 +85,23 @@ public class PsqlStore implements Store {
             e.printStackTrace();
         }
         return can;
+    }
+
+    @Override
+    public Collection<User> findAllUsers() {
+        List<User> luser = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM users")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    luser.add(new User(it.getInt("id"), it.getString("name"), it.getString("email")));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return luser;
     }
 
     @Override
@@ -130,6 +151,25 @@ public class PsqlStore implements Store {
         return can;
     }
 
+    private User create(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name, email, password) VALUES (?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    user.setId(id.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
     private void update(Candidate can) {
 
     }
@@ -141,9 +181,9 @@ public class PsqlStore implements Store {
 
     @Override
     public void save(Candidate can) {
-        if(can.getId() == 0){
+        if (can.getId() == 0) {
             create(can);
-        } else{
+        } else {
             update(can);
         }
     }
@@ -152,4 +192,23 @@ public class PsqlStore implements Store {
     public Candidate findCById(int id) {
         return null;
     }
+
+    @Override
+    public void save(User user) {
+        if (user.getId() == 0) {
+            create(user);
+        } else {
+            log.info("Данный пользователь уже существует");
+        }
+    }
+
+    @Override
+    public User findUserById(int id) {
+        return null;
+    }
+
+    private void update(User user) {
+
+    }
+
 }
