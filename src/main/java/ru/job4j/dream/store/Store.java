@@ -17,11 +17,18 @@ public interface Store {
 
     Post findById(int id);
 
+    void delete(Post post);
+
     void save(Candidate can);
 
     Candidate findCById(int id);
 
+    void delete(Candidate can);
+
     void save(User user);
 
     User findUserById(int id);
+
+    void delete(User user);
+
 }
