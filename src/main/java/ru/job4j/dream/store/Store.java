@@ -35,4 +35,5 @@ public interface Store {
     Optional<User> findUserBy(final String email,
                               final String password);
 
+    Optional<User> findByEmail(String email);
 }

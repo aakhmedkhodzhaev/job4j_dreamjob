@@ -316,6 +316,29 @@ public class PsqlStore implements Store {
         return Optional.of(user);
     }
 
+    @Override
+    public Optional<User> findByEmail(String email) {
+        User user = new User();
+        try (Connection conn = pool.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT * FROM users WHERE email = ? ")) {
+            ps.setString(1, email);
+            final ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                return Optional.empty();
+            }
+            user = new User(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("password"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.of(user);
+    }
+
+    @Override
     public void delete(Post post) {
         try (Connection connection = pool.getConnection();
              PreparedStatement st = connection.prepareStatement(
@@ -327,6 +350,7 @@ public class PsqlStore implements Store {
         }
     }
 
+    @Override
     public void delete(Candidate can) {
         try (Connection connection = pool.getConnection();
              PreparedStatement st = connection.prepareStatement(
@@ -338,6 +362,7 @@ public class PsqlStore implements Store {
         }
     }
 
+    @Override
     public void delete(User user) {
         try (Connection connection = pool.getConnection();
              PreparedStatement st = connection.prepareStatement(
