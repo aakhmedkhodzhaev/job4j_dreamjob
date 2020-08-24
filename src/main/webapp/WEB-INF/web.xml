@@ -62,6 +62,16 @@
   </filter-mapping>
 
   <servlet>
+    <servlet-name>GreetingServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlets.GreetingServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>GreetingServlet</servlet-name>
+    <url-pattern>/greet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>UploadServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlets.UploadServlet</servlet-class>
   </servlet>
