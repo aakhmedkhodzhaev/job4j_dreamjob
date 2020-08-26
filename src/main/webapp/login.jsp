@@ -24,6 +24,23 @@
     <title>Работа мечты</title>
 </head>
 <body>
+<script>
+    function validate() {
+        var valuea = $('#email').val(),
+            valueb = $('#pwd').val();
+
+        if (valuea != '' && valueb != '') {
+            return true;
+        } else if (valuea == '') {
+            alert($('#email').attr('title'));
+            return false;
+        } else if (valueb == '') {
+            alert($('#pwd').attr('title'));
+            return false;
+        }
+        return (true);
+    }
+</script>
 <div class="container pt-3">
 
     <div class="row">
@@ -35,13 +52,15 @@
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
                         <label>Почта</label>
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" name="email" id="email" title="Enter email"
+                               placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
-                        <input type="text" class="form-control" name="password">
+                        <input type="text" class="form-control" name="password" id="pwd" title="Enter password"
+                               placeholder="Enter password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <button type="submit" class="btn btn-primary" onclick="validate()">Войти</button>
                     <ul class="nav">
                         <li class="nav-item">
                             <a class="nav-link" href="<%=request.getContextPath()%>/reg.do">Регистрация</a>
