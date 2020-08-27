@@ -22,15 +22,25 @@ public class RegServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name"),
+                email = req.getParameter("email"),
+                password = req.getParameter("password");
+
         req.setCharacterEncoding("UTF-8");
-        PsqlStore.instOf().save(
-                new User(
-                        req.getParameter("name"),
-                        req.getParameter("email"),
-                        req.getParameter("password")
-                )
-        );
-        resp.sendRedirect(req.getContextPath() + "/index.do");
+        if (PsqlStore.instOf().findByEmail(email) == null
+                && name != "" && email != "" && password != ""
+                && name.length() > 5 && email.length() > 5 && password.length() > 0) {
+            PsqlStore.instOf().save(
+                    new User(
+                            name, // req.getParameter("name"),
+                            email, // req.getParameter("email"),
+                            password // req.getParameter("password")
+                    )
+            );
+            resp.sendRedirect(req.getContextPath() + "/index.do");
+        } else {
+            resp.sendRedirect(req.getContextPath() + "/reg.do");
+        }
     }
 
 

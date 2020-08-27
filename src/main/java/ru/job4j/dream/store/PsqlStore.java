@@ -293,6 +293,30 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public User findByUser(final String email,
+                           final String password) {
+        try (Connection conn = pool.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT * FROM users WHERE email = ? AND password=?")) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+            final ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                return null; // Optional.empty() верно будет так, но из-за проверки ставим null
+            }
+            User user = new User(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("password"));
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public Optional<User> findUserBy(final String email,
                                      final String password) {
         User user = new User();
@@ -303,7 +327,7 @@ public class PsqlStore implements Store {
             ps.setString(2, password);
             final ResultSet rs = ps.executeQuery();
             if (!rs.next()) {
-                return Optional.empty();
+                return null; // Optional.empty() верно будет так, но из-за проверки ставим null
             }
             user = new User(
                     rs.getInt("id"),
@@ -325,7 +349,7 @@ public class PsqlStore implements Store {
             ps.setString(1, email);
             final ResultSet rs = ps.executeQuery();
             if (!rs.next()) {
-                return Optional.empty();
+                return null; // Optional.empty() верно будет так, но из-за проверки ставим null
             }
             user = new User(
                     rs.getInt("id"),
