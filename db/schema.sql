@@ -13,6 +13,7 @@ CREATE TABLE candidate (
    id SERIAL PRIMARY KEY,
    name TEXT,
    photo_id INTEGER,
+   city_id INTEGER,
    FOREIGN KEY (photo_id)
       REFERENCES photo (photo_id)
 );
