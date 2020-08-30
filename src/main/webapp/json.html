@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>jQuery Ajax POST data Request and Response Example</title>
+
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet"
+          type="text/css"/>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript"></script>
+
+</head>
+<body>
+<script>
+    $(document).ready(function () {
+
+        $("#myAjaxRequestForm").submit(function (e) {
+            e.preventDefault();
+        });
+
+        $("#myButton").click(function (e) {
+
+            dataString = $("#myAjaxRequestForm").serialize();
+
+            var emails = $("input#email").val();
+            dataString = "email=" + emails;
+
+//make the AJAX request, dataType is set to json
+//meaning we are expecting JSON data in response from the server
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/items/json",
+                data: dataString,
+                dataType: "json",
+
+                success: function (data) {
+                    if (data.success) {
+                        $("#ajaxResponse").html("");
+                        $("#ajaxResponse").append("{ <b>id:</b> " + data.userInfo.id + " ");
+                        $("#ajaxResponse").append("<b>name:</b> " + data.userInfo.name + " ");
+                        $("#ajaxResponse").append("<b>Email:</b> " + data.userInfo.email + " ");
+                        $("#ajaxResponse").append("<b>password:</b> " + data.userInfo.password + " }");
+                    }
+                    else {
+                        $("#ajaxResponse").html("<div><b>Email in Invalid!</b></div>");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Something really bad happened " + textStatus);
+                    $("#ajaxResponse").html(jqXHR.responseText);
+                },
+
+                beforeSend: function (jqXHR, settings) {
+                    settings.data += "&dummyData=whatever";
+                    $('#myButton').attr("disabled", true);
+                },
+
+                complete: function (jqXHR, textStatus) {
+                    $('#myButton').attr("disabled", false);
+                }
+            });
+        });
+    });
+</script>
+<form id="myAjaxRequestForm">
+    <fieldset>
+        <legend>jQuery Ajax Form data Submit Request</legend>
+
+        <p>
+            <label for="email">Email Data:</label>
+
+            <input id="email" type="text" name="email"/>
+        </p>
+        <p>
+            <input id="myButton" type="button" value="Submit"/>
+        </p>
+    </fieldset>
+</form>
+<div id="anotherSection">
+    <fieldset>
+        <legend>Response from jQuery Ajax Request</legend>
+        <div id="ajaxResponse"></div>
+    </fieldset>
+</div>
+
+</body>
+</html>

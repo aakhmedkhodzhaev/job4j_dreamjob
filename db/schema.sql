@@ -1,8 +1,9 @@
 CREATE TABLE users (
    id SERIAL PRIMARY KEY,
    name TEXT,
-   email TEXT,
-   password TEXT
+   email TEXT NOT NULL,
+   password TEXT,
+   CONSTRAINT users_email_ukey UNIQUE (email)
 );
 
 CREATE TABLE post (

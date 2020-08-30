@@ -32,6 +32,8 @@ public interface Store {
 
     void delete(User user);
 
+    User findEmailBy(String email);
+
     User findByUser(final String email,
                     final String password);
 

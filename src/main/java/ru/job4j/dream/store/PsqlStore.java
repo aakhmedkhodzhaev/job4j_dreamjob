@@ -341,6 +341,29 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public User findEmailBy(String email) {
+
+        try (Connection conn = pool.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT * FROM users WHERE email = ? ")) {
+            ps.setString(1, email);
+            final ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                return null; // Optional.empty() верно будет так, но из-за проверки ставим null
+            }
+            User user = new User(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("password"));
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public Optional<User> findByEmail(String email) {
         User user = new User();
         try (Connection conn = pool.getConnection();

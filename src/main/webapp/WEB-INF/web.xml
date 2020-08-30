@@ -72,6 +72,16 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>JsonServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlets.JsonServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>JsonServlet</servlet-name>
+    <url-pattern>/json</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>UploadServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlets.UploadServlet</servlet-class>
   </servlet>
