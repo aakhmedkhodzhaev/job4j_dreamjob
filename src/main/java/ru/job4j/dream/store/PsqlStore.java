@@ -147,10 +147,12 @@ public class PsqlStore implements Store {
     private Candidate create(Candidate can) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "INSERT INTO candidate(name) VALUES (?)",
+                     "INSERT INTO candidate(name, photo_id, city_id) VALUES (?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, can.getName());
+            ps.setInt(2, can.getPhotoId());
+            ps.setInt(3, can.getCityId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
