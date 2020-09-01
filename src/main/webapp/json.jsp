@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.model.Candidate" %>
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
+<%@ page import="ru.job4j.dream.model.Post" %>
+<%@ page import="ru.job4j.dream.model.City" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,53 +24,22 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate can = new Candidate(0, "");
+    City city = new City(0, "");
     if (id != null) {
-        can = PsqlStore.instOf().findCById(Integer.valueOf(id));
+        city = PsqlStore.instOf().findCityById(Integer.valueOf(id));
     }
 %>
-<script>
-    function recognizeCountry() {
-        let country = $('select#country').val();
-        let city = $('select#city');
-        $.ajax({
-            type: 'GET',
-            url: '/edit/cities',
-            data: 'country=' + country,
-            dataType: 'json',
-            success: (function(response) {
-                city.find('option').remove();
-                $.each(response, function(index, value) {
-                    $('<option>').val(value).text(value).appendTo(city);
-                })
-            }),
-            error: (function(err) {
-                alert(err);
-            })
-        });
-    }
-</script>
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <% if (id == null) { %>
                 Новая вакансия.
-                <% } else { %>
-                Редактирование вакансии.
-                <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=can.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/json?id=<%=city.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="name" value="<%=can.getName()%>">
-                        <label>Выберите Город: </label>
-                        <select class="form-control" name="city" id="city" onclick="recognizeCountry()">
-                            <option value="empty">---</option>
-                        </select>
-                        <label>Фотография</label>
-                        <input type="text" class="form-control" name="name" value="<%=can.getPhotoId()%>">
+                        <input type="text" class="form-control" name="name" value="<%=city.getName()%>">
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

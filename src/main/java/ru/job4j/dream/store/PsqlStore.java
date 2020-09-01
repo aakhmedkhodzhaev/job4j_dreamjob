@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
@@ -102,6 +103,23 @@ public class PsqlStore implements Store {
             e.printStackTrace();
         }
         return luser;
+    }
+
+    @Override
+    public Collection<City> findAllCity() {
+        List<City> lcity = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM city")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    lcity.add(new City(it.getInt("id"), it.getString("name")));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lcity;
     }
 
     @Override
@@ -385,6 +403,51 @@ public class PsqlStore implements Store {
             e.printStackTrace();
         }
         return Optional.of(user);
+    }
+
+    public void save(City city) {
+        if (city.getId() == 0) {
+            create(city);
+        } else {
+            LOG.info("Город с таким именем существует");
+        }
+    }
+
+    private City create(City city) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO city (name) VALUES (?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, city.getName());
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    city.setId(id.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return city;
+    }
+
+    @Override
+    public City findCityById(int id) {
+        City city = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM city Where id = ?")) {
+            ps.setInt(1, id);
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    city = new City(
+                            it.getInt("id"),
+                            it.getString("name")
+                    );
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return city;
     }
 
     @Override
