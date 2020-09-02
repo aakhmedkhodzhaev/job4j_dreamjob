@@ -27,18 +27,17 @@
 <script>
     function validate() {
         var valuea = $('#email').val(),
-            valueb = $('#pwd').val();
-
-        if (valuea != '' && valueb != '') {
-            return true;
-        } else if (valuea == '') {
+            valueb = $('#pwd').val(),
+            result = false;
+        if (valuea == '') {
             alert($('#email').attr('title'));
-            return false;
         } else if (valueb == '') {
             alert($('#pwd').attr('title'));
-            return false;
         }
-        return (true);
+        else{
+            result = true;
+        }
+        return result;
     }
 </script>
 <div class="container pt-3">

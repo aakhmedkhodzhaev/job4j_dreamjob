@@ -35,21 +35,20 @@
     function validate() {
         var value = $('#name').val(),
             valuea = $('#email').val(),
-            valueb = $('#pwd').val();
+            valueb = $('#pwd').val(),
+            result = false;
 
-        if (value != '' && valuea != '' && valueb != '') {
-            return true;
-        } else if (value == '') {
+        if (value == '') {
             alert($('#name').attr('title'));
-            return false;
         } else if (valuea == '') {
             alert($('#email').attr('title'));
-            return false;
         } else if (valueb == '') {
             alert($('#pwd').attr('title'));
-            return false;
         }
-        return (true);
+        else {
+            result = true;
+        }
+        return result;
     }
 </script>
 <div class="container pt-3">

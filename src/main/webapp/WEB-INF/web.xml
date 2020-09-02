@@ -82,6 +82,16 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>AjaxServlets</servlet-name>
+    <servlet-class>ru.job4j.dream.servlets.AjaxServlets</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AjaxServlets</servlet-name>
+    <url-pattern>/ajax</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>UploadServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlets.UploadServlet</servlet-class>
   </servlet>
