@@ -24,7 +24,6 @@ import java.util.List;
 public class AjaxServlets extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         try {
             Collection<City> lcity = PsqlStore.instOf().findAllCity();
             String json = new Gson().toJson(lcity);
@@ -38,12 +37,6 @@ public class AjaxServlets extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-     /* String city = req.getParameter("city");
-        String txt = "Вы выбрали город : " + city;
-        resp.setContentType("text/plain");
-        resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(txt);*/
-
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletContext servletContext = this.getServletConfig().getServletContext();
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
