@@ -4,7 +4,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.IOUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -43,7 +42,8 @@ public class UploadServlet extends HttpServlet {
             }
             for (FileItem item : items) {
                 if (!item.isFormField()) {
-                    File file = new File(folder + File.separator + item.getName());
+                    String fileIndex = item.getName().substring(item.getName().lastIndexOf("\\") + 1);
+                    File file = new File(folder + File.separator + fileIndex);
                     try (BufferedInputStream in = new BufferedInputStream(item.getInputStream());
                          FileOutputStream out = new FileOutputStream(file)) {
                         byte[] dataBuffer = new byte[1024];
@@ -54,7 +54,7 @@ public class UploadServlet extends HttpServlet {
                     }
                 }
             }
-        } catch (FileUploadException e) {
+        } catch (FileUploadException | FileNotFoundException e) {
             e.printStackTrace();
         }
         doGet(req, resp);
