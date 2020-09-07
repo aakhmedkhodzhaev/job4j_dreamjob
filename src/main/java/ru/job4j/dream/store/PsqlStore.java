@@ -165,12 +165,12 @@ public class PsqlStore implements Store {
     private Candidate create(Candidate can) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
-                     "INSERT INTO candidate(name, photo_id, city_id) VALUES (?, ?, ?)",
+                     "INSERT INTO candidate(name, city_id, photo_id) VALUES (?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, can.getName());
-            ps.setInt(2, can.getPhotoId());
-            ps.setInt(3, can.getCityId());
+            ps.setInt(2, can.getCityId());
+            ps.setString(3, can.getPhotoId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -208,7 +208,7 @@ public class PsqlStore implements Store {
         try (Connection conn = pool.getConnection();
              PreparedStatement ps = conn.prepareStatement("UPDATE candidate SET name = ?,  photo_id = ? WHERE id = ?")) {
             ps.setString(1, can.getName());
-            ps.setInt(2, can.getPhotoId());
+            ps.setString(2, can.getPhotoId());
             ps.setInt(3, can.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -258,7 +258,7 @@ public class PsqlStore implements Store {
                     can = new Candidate(
                             it.getInt("id"),
                             it.getString("name"),
-                            it.getInt("photo_id")
+                            it.getString("photo_id")
                     );
                 }
             }

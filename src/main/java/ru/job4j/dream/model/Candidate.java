@@ -6,7 +6,7 @@ public class Candidate {
     private int id;
     private String name;
     private int cityId;
-    private int photoId;
+    private String photoId;
 
     public Candidate() {
     }
@@ -16,13 +16,13 @@ public class Candidate {
         this.name = name;
     }
 
-    public Candidate(int id, String name, int photoId) {
+    public Candidate(int id, String name, String photoId) {
         this.id = id;
         this.name = name;
         this.photoId = photoId;
     }
 
-    public Candidate(int id, String name, int cityId, int photoId) {
+    public Candidate(int id, String name, int cityId, String photoId) {
         this.id = id;
         this.name = name;
         this.cityId = cityId;
@@ -53,11 +53,11 @@ public class Candidate {
         this.cityId = cityId;
     }
 
-    public int getPhotoId() {
+    public String getPhotoId() {
         return photoId;
     }
 
-    public void setPhotoId(int photoId) {
+    public void setPhotoId(String photoId) {
         this.photoId = photoId;
     }
 
