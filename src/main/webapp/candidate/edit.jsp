@@ -8,6 +8,50 @@
     <title>Test Ajax List of City</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+        function validate() {
+            let name = $('#name'),
+                cityId = $('#cityId'),
+                photoId = $('#photoId'),
+                result = false;
+            if (name == '') {
+                alert('Заполните поле Имя');
+            } else if (cityId == '') {
+                alert('Выберите город');
+            } else if (photoId == '') {
+                alert('Загрузите фотографию')
+            } else {
+                result = true;
+            }
+            result;
+        }
+
+
+        $(document).ready(function () {
+
+            $("#but_upload").click(function () {
+
+                var fd = new FormData();
+                var files = $('#photoId')[0].files[0];
+                fd.append('file', files);
+
+                $.ajax({
+                    url: '/dreamjob/upload',
+                    type: 'post',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response != 0) {
+                            $("#img").attr("src", response);
+                            $(".preview img").show(); // Display image element
+                        } else {
+                            alert('file not uploaded');
+                        }
+                    },
+                });
+            });
+        });
+
         function chooseCity() {
             $.get("ajax", function (responseJson) {
                 var $select = $("#Citylist");
@@ -37,6 +81,17 @@
         <% } %>
     </div>
     <h2>Test Ajax List of City</h2>
+    <br/>
+    <form method="post" action="" enctype="multipart/form-data">
+        <div>
+            <label for="photoId"> Выберите фотографию: </label>
+            <br/>
+            <input type="file" id="photoId" name="photoId" placeholder="photoId"/>
+        </div>
+            <br/>
+        <input type="button" class="button" value="Upload" id="but_upload">
+    </form>
+
     <form action="<%=request.getContextPath()%>/candidates.do?id=<%=can.getId()%>" method="post">
         <td>
             <tr>
@@ -45,8 +100,8 @@
         </td>
         <br>
         <br>
-   <!-- <button name="cityId" onclick="chooseCity()">Load</button> &nbsp;
-        <select id="Citylist"></select> -->
+        <!-- <button name="cityId" onclick="chooseCity()">Load</button> &nbsp;
+             <select id="Citylist"></select> -->
         <select name="cityId">
             <option value="1">Astana</option>
             <option value="2">Minsk</option>
@@ -58,18 +113,8 @@
             <option value="8">Riga</option>
         </select>
         <br/>
-        <p>Upload Image:</p>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <div class="check-box" align="center">
-                <td>
-                    <tr>
-                        <input type="file" id="file" name="photoId"/>
-                    </tr>
-                </td>
-            </div>
-            </br>
-            <button type="submit" id="buttonSubmit">Submit</button>
-        </form>
+        <br/>
+        <button type="submit" id="buttonSubmit" onclick="validate()">Submit</button>
     </form>
 </div>
 </body>
