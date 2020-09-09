@@ -5,13 +5,13 @@
          pageEncoding="UTF-8" %>
 <html lang="en">
 <head>
-    <title>Test Ajax List of City</title>
+    <title>Работа мечты</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         function validate() {
-            let name = $('#name'),
-                cityId = $('#cityId'),
-                photoId = $('#photoId'),
+            let name = $('#name').val(),
+                cityId = $('#cityId').val(),
+                photoId = $('#photoId').val(),
                 result = false;
             if (name == '') {
                 alert('Заполните поле Имя');
@@ -22,7 +22,7 @@
             } else {
                 result = true;
             }
-            result;
+            return result;
         }
 
 
@@ -51,17 +51,6 @@
                 });
             });
         });
-
-        function chooseCity() {
-            $.get("ajax", function (responseJson) {
-                var $select = $("#Citylist");
-                $select.find("option").remove();
-                $.each(responseJson, function (index, city) {
-                    $("<option>").val(city.id).text(city.name).appendTo($select);
-                });
-
-            });
-        };
     </script>
 </head>
 <body>
@@ -100,8 +89,6 @@
         </td>
         <br>
         <br>
-        <!-- <button name="cityId" onclick="chooseCity()">Load</button> &nbsp;
-             <select id="Citylist"></select> -->
         <select name="cityId">
             <option value="1">Astana</option>
             <option value="2">Minsk</option>

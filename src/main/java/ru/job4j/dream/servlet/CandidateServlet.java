@@ -20,13 +20,17 @@ public class CandidateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        PsqlStore.instOf().save(
-                new Candidate(0,
-                        req.getParameter("name"),
-                        Integer.parseInt(req.getParameter("cityId")),
-                        req.getParameter("photoId")
-                )
-        );
-        resp.sendRedirect(req.getContextPath() + "/candidates.do");
+        if (req.getParameter("name").length() > 5) {
+            PsqlStore.instOf().save(
+                    new Candidate(0,
+                            req.getParameter("name"),
+                            Integer.parseInt(req.getParameter("cityId")),
+                            req.getParameter("photoId")
+                    )
+            );
+            resp.sendRedirect(req.getContextPath() + "/candidates.do");
+        } else {
+            resp.sendRedirect(req.getContextPath() + "/candidate/edit.jsp");
+        }
     }
 }
