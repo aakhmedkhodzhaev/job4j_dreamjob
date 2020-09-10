@@ -3,7 +3,7 @@
          pageEncoding="ISO-8859-1" %>
 <html>
 <head>
-    <title>Test Ajax List of City</title>
+    <title>Ajax List of City</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(document).on("click", "#buttonLoad", function () {
@@ -16,13 +16,6 @@
 
             });
         });
-        /*
-                $(document).on("click", "#buttonSubmit", function () {
-                    var params = {city: $("#Citylist option:selected").text()};
-                    $.post("ajax", $.param(params), function (responseText) {
-                        alert(responseText);
-                    });
-                });*/
     </script>
 </head>
 <body>
