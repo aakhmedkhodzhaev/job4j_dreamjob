@@ -206,10 +206,11 @@ public class PsqlStore implements Store {
 
     private void update(Candidate can) {
         try (Connection conn = pool.getConnection();
-             PreparedStatement ps = conn.prepareStatement("UPDATE candidate SET name = ?,  photo_id = ? WHERE id = ?")) {
+             PreparedStatement ps = conn.prepareStatement("UPDATE candidate SET name = ?, city_id = ?, photo_id = ? WHERE id = ?")) {
             ps.setString(1, can.getName());
-            ps.setString(2, can.getPhotoId());
-            ps.setInt(3, can.getId());
+            ps.setInt(2, can.getCityId());
+            ps.setString(3, can.getPhotoId());
+            ps.setInt(4, can.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -258,6 +259,7 @@ public class PsqlStore implements Store {
                     can = new Candidate(
                             it.getInt("id"),
                             it.getString("name"),
+                            it.getInt("city_id"),
                             it.getString("photo_id")
                     );
                 }

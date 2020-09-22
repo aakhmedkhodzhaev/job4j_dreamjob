@@ -22,12 +22,13 @@ public class CandidateServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         if (req.getParameter("name").length() > 5) {
             PsqlStore.instOf().save(
-                    new Candidate(0,
+                    new Candidate(
+                            Integer.valueOf(req.getParameter("id")),
                             req.getParameter("name"),
                             Integer.parseInt(req.getParameter("cityId")),
                             req.getParameter("photoId")
                     )
-            );
+                    );
             resp.sendRedirect(req.getContextPath() + "/candidates.do");
         } else {
             resp.sendRedirect(req.getContextPath() + "/candidate/edit.jsp");
