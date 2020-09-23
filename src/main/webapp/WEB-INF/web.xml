@@ -4,111 +4,131 @@
 
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
          version="2.5">
-  <display-name>Archetype Created Web Application</display-name>
+    <display-name>Archetype Created Web Application</display-name>
 
-  <servlet>
-    <servlet-name>IndexServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.IndexServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>IndexServlet</servlet-name>
-    <url-pattern>/index.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.IndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/index.do</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>PostServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.PostServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>PostServlet</servlet-name>
-    <url-pattern>/posts.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.PostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/posts.do</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>CandidateServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.CandidateServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CandidateServlet</servlet-name>
-    <url-pattern>/candidates.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>CandidateServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.CandidateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CandidateServlet</servlet-name>
+        <url-pattern>/candidates.do</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>RegServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.RegServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegServlet</servlet-name>
-    <url-pattern>/reg.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>RegServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.RegServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegServlet</servlet-name>
+        <url-pattern>/reg.do</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>AuthServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.AuthServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AuthServlet</servlet-name>
-    <url-pattern>/auth.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>AuthServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.AuthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthServlet</servlet-name>
+        <url-pattern>/auth.do</url-pattern>
+    </servlet-mapping>
 
-  <filter>
-    <filter-name>AuthFilter</filter-name>
-    <filter-class>ru.job4j.dream.filter.AuthFilter</filter-class>
-  </filter>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ru.job4j.dream.filter.AuthFilter</filter-class>
+    </filter>
 
-  <filter-mapping>
-    <filter-name>AuthFilter</filter-name>
-    <url-pattern>*.do</url-pattern>
-  </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
 
-  <servlet>
-    <servlet-name>GreetingServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlets.GreetingServlet</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>GreetingServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlets.GreetingServlet</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>GreetingServlet</servlet-name>
-    <url-pattern>/greet</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GreetingServlet</servlet-name>
+        <url-pattern>/greet</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>JsonServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlets.JsonServlet</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>JsonServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlets.JsonServlet</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>JsonServlet</servlet-name>
-    <url-pattern>/json</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JsonServlet</servlet-name>
+        <url-pattern>/json</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>AjaxServlets</servlet-name>
-    <servlet-class>ru.job4j.dream.servlets.AjaxServlets</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>AjaxServlets</servlet-name>
+        <servlet-class>ru.job4j.dream.servlets.AjaxServlets</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>AjaxServlets</servlet-name>
-    <url-pattern>/ajax</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AjaxServlets</servlet-name>
+        <url-pattern>/ajax</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>UploadServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlets.UploadServlet</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlets.UploadServlet</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/upload</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
 
-  <servlet>
-    <servlet-name>DownloadServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlets.DownloadServlet</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>DownloadServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlets.DownloadServlet</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>DownloadServlet</servlet-name>
-    <url-pattern>/download</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/download</url-pattern>
+    </servlet-mapping>
+
+    <!-- Errors Block -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+
+    <!-- Exceptions Block -->
+    <error-page>
+        <exception-type>java.io.IOException</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
 
 </web-app>
