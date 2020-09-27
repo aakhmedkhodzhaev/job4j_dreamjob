@@ -17,10 +17,8 @@ public class DownloadServlet extends HttpServlet {
         resp.setHeader("Content-Disposition", "attachment; filename=\"" + name + "\"");
         File file = new File("images" + File.separator + name);
         try (FileInputStream in = new FileInputStream(file)) {
-            int bytesRead;
-            while ((bytesRead = in.read()) != -1) {
-                resp.getOutputStream().write(bytesRead);
-            }
+            byte[] bytes = IOUtils.toByteArray(in);
+            resp.getOutputStream().write(bytes);
         }
     }
 }
