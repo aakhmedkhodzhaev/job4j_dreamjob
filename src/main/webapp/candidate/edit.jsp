@@ -104,9 +104,9 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id == null) { %>
-                Новая вакансия.
+                Новый кандидат.
                 <% } else { %>
-                Редактирование вакансии.
+                Редактирование кандидат.
                 <% } %>
             </div>
             <div class="card-body">
@@ -144,7 +144,8 @@
                     <br/>
                     <br/>
                     <button type="submit" class="btn btn-primary"
-                            id="buttonSubmit" onclick="validate()">Сохранить</button>
+                            id="buttonSubmit" onclick="validate()">Сохранить
+                    </button>
                 </form>
             </div>
         </div>
