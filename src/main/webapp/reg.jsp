@@ -78,7 +78,7 @@
                         <input type="text" class="form-control" name="password" id="pwd" title="Enter password"
                                placeholder="Enter password">
                     </div>
-                    <button type="submit" class="btn btn-primary" value="Submit" onclick="validate()">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" onclick="return validate()">Сохранить</button>
                 </form>
             </div>
         </div>
