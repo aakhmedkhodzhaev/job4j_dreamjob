@@ -51,12 +51,12 @@
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
                         <label>Почта</label>
-                        <input type="text" class="form-control" name="email" id="email" title="Enter email"
+                        <input type="email" class="form-control" name="email" id="email" title="Enter email"
                                placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
-                        <input type="text" class="form-control" name="password" id="pwd" title="Enter password"
+                        <input type="password" class="form-control" name="password" id="pwd" title="Enter password"
                                placeholder="Enter password">
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="validate()">Войти</button>
