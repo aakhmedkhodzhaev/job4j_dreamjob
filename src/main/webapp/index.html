@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        #email, #pwd, #fname, #lname {
+            width: 300px;
+        }
+    </style>
     <script>
         function validate() {
             var valuea = $('#email').val(),
@@ -30,11 +35,11 @@
             var lname = $('#lname').val();
             var email = $('#email').val();
 
-            $('#table tr:last').after('<tr>'+
-                '<td>' + fname + '</td>'+
-                '<td>' + lname + '</td>'+
-                '<td>' + email + '</td>'+
-            '</tr>');
+            $('#table tr:last').after('<tr>' +
+                '<td>' + fname + '</td>' +
+                '<td>' + lname + '</td>' +
+                '<td>' + email + '</td>' +
+                '</tr>');
         }
     </script>
 </head>
@@ -45,7 +50,7 @@
         <h1>My First Bootstrap Page</h1>
         <p>This is some text.</p>
     </div>
-    <form action="/action_page.php">
+    <form action="/index.do">
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" title="Enter email" placeholder="Enter email"
@@ -59,7 +64,20 @@
         <div class="checkbox">
             <label><input type="checkbox" name="remember"> Remember me</label>
         </div>
-        <button type="submit" class="btn btn-default" onclick="return validate()">Submit</button>
+        <button type="button" class="btn btn-default" onclick="return validate()">Submit</button>
+    </form>
+    <br> <br>
+    <form>
+        <div class="form-group">
+            <label for="fname">First name:</label>
+            <input type="text" class="form-control" id="fname" title="first name" placeholder="enter First name"
+                   name="fname">
+        </div>
+        <div class="form-group">
+            <label for="lname">Last name:</label>
+            <input type="text" class="form-control" id="lname" title="last name" placeholder="enter Last name"
+                   name="lname">
+        </div>
     </form>
     <br> <br>
     <table id='table' class="table table-bordered">
