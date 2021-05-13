@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.model.Candidate" %>
-<%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,6 +22,12 @@
     <title>Работа мечты</title>
 </head>
 <body>
+<style>
+    #email, #pwd {
+        width: 300px;
+    }
+
+</style>
 <script>
     function validate() {
         var valuea = $('#email').val(),
@@ -34,7 +38,7 @@
         } else if (valueb == '') {
             alert($('#pwd').attr('title'));
         }
-        else{
+        else {
             result = true;
         }
         return result;
@@ -43,7 +47,8 @@
 <div class="container pt-3">
 
     <div class="row">
-        <div class="card" style="width: 100%">
+        <div class="card"
+             style="position: center; margin-left: auto; margin-right: auto; left: 0; right: 0;">
             <div class="card-header">
                 Авторизация
             </div>
